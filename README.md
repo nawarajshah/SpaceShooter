@@ -1,4 +1,5 @@
-# SpaceShooter
-Space Shooter Game Project
+# Hospital Management System
 
-This is a c++ project game.
+To make the code more readable to everyone, please flow the following guidlines.
+* Make a variable or object name meaningfull. eg. of bad variable or object name: string n (for name), date d (for date).
+* Use comment to explain the code.
