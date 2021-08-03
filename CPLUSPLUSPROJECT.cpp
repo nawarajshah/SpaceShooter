@@ -11,7 +11,7 @@ protected:
     char BloodGroup[5], gender[15], specialization[45], RoomNo[10], DateTime[45], appointment[25];
 
 public:
-    //current used functions
+    //current used functions added comment
     void getdata(){};
     void showdata(){};
 
