@@ -41,11 +41,11 @@ class Person
 };
 
 // for testing porpose only
-int main()
+/*int main()
 {
     Person person;
     person.getPersonData();
     person.showPersonData();
 
     return 0;
-}
+}*/
