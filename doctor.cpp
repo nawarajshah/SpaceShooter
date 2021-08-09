@@ -11,11 +11,13 @@
 #include <cstring>
 using namespace std;
 
-class doctor: public Available , public Disease , public Person{
+class doctor: public Person{
 	private:
 		int doctorid;
-		Disease diseasename;
+		Disease disease;
 		Available availableon;
+        char doctorFile[20] = "doctorData.dat";
+        char doctorTempFile[20] = "doctorData2.dat";
 	public:
 		void getdoctordata(){
 			cout << "enter data of doctor " << endl;
@@ -23,118 +25,156 @@ class doctor: public Available , public Disease , public Person{
 			cout << "enter doctor id ";
 			cin >> doctorid;
 			cout << "enter name of specializations ";
-			getDiseaseDetail();
-			whenAvailable();
+			disease.getDiseaseDetail();
+			availableon.whenAvailable();
 		}
 		
 		void showdoctordata(){
 			cout << "\n\t\t\t DETAILS OF DOCTOR ARE:" << endl;
 			 showPersonData();
 			cout << "doctor id is " << doctorid << endl;
-			 showDiseaseList();
-			 displayAvailable();
+			 disease.showDiseaseList();
+			 availableon.displayAvailable();
 			cout << endl << endl;
 		}
 		
 		void adddoctordata(){
 			getdoctordata();
 			ofstream doctordatabase("doctordata.dat",ios::binary|ios::out|ios::app);
-			doctordatabase.write(reinterpret_cast<char*>(this),sizeof(doctor));	
+			doctordatabase.write((char*)this,sizeof(doctor));	
 		}
 		
 		void showdoctordatafromfile(){
-			ifstream readdatafromdatabase("doctordata.dat",ios::binary|ios::in);
+			ifstream readdatafromdatabase(doctorFile,ios::binary|ios::in);
 			
 			while(!readdatafromdatabase.eof()){
 		
-				if(readdatafromdatabase.read(reinterpret_cast<char*>(this),sizeof(doctor))>0){
-				
-					showdoctordata();}
+				if(readdatafromdatabase.read((char*)this,sizeof(doctor)))
+					showdoctordata();
 			}
 		}
 		
 		void deletedoctor(){
-			int n;
+			int n, flag = 0;
 			cout << "enter the doctorid of doctor you want to delete";
 			cin >> n;
-			ifstream readdoctordatabase2("doctordata.dat",ios::binary|ios::in);
-			ofstream writedoctordatabase2("doctordata2.dat",ios::binary|ios::out);
-			while(!readdoctordatabase2.eof()){
-				if(readdoctordatabase2.read(reinterpret_cast<char*>(this),sizeof(doctor))>0){
-				
-				if (n != doctorid) {
-					writedoctordatabase2.write(reinterpret_cast<char*>(this),sizeof(doctor));
+
+			ifstream ifdoctor;
+			ifdoctor.open(doctorFile,ios::binary|ios::in);
+			ofstream ofdoctor;
+			ofdoctor.open(doctorTempFile,ios::binary|ios::out);
+
+			while(!ifdoctor.eof()){
+				ifdoctor.read((char*)this,sizeof(doctor));
+				if(ifdoctor){
+
+					// comparing the patient Id with that
+                    // of the entered patient Id
+                    if (n == doctorid) {
+                        flag = 1;
+                    }
+                    else {
+                        ofdoctor.write((char*)this,sizeof(doctor));
+                    }
 				}
 			}
-			}
-			readdoctordatabase2.close();
-			writedoctordatabase2.close();
-			remove("doctordata.dat");
-			rename("doctordata2.dat","doctordata.dat");
-			//showdoctordatafromfile();
+			ifdoctor.close();
+			ofdoctor.close();
+			remove(doctorFile);
+			rename(doctorTempFile,doctorFile);
+			showdoctordatafromfile();
+
+			if (flag == 1)
+                cout << "\nRecord successfully deleted \n";
+            else
+                cout << "\nRecord not found \n";
 		}
 		
 		void editdoctor(){
-			int n;
+			int n, pos, flag = 0;
 			cout << "enter the doctorid of doctor you want to edit";
 			cin >> n;
+
 			//int count=1;
-			ifstream readdoctordatabase2("doctordata.dat",ios::binary|ios::in);
-			ofstream writedoctordatabase2("doctordata3.dat",ios::binary|ios::out);
-			while(!readdoctordatabase2.eof()){
-				if(readdoctordatabase2.read(reinterpret_cast<char*>(this),sizeof(doctor))>0){
-				
-				 if (n!=doctorid) {
-					writedoctordatabase2.write(reinterpret_cast<char*>(this),sizeof(doctor));
-				}
-				else if(n = doctorid){
-					doctor temp;
-					temp.getdoctordata();
-					writedoctordatabase2.write(reinterpret_cast<char*>(&temp),sizeof(doctor));
+			fstream fdoctor;
+			fdoctor.open(doctorFile, ios::binary | ios::in | ios::out);
+
+			while(!fdoctor.eof()){
+                // storing the position of
+                // current file pointeri.e. at
+                // the end of previously read record
+                pos = fdoctor.tellg();
+
+				fdoctor.read((char*)this,sizeof(doctor));
+				if(fdoctor){
+
+                    // comparing the patient Id with that
+                    // of the entered patient Id
+					if (n == doctorid) {
+                        flag = 1;
+
+						// setting the new (modified )
+                        // data of the object or new record
+						getdoctordata();
+						
+                        // placing the put(writing) pointer
+                        // at the starting of the  record
+                        fdoctor.seekp(pos);
+						
+                        // writing the object to the file
+						fdoctor.write((char*)this,sizeof(doctor));
+
+                        // display the data
+                        showdoctordata();
+                        break;
+					}
 				}
 			}
+			fdoctor.close();
+
+            if (flag == 1)
+                cout << "\nRecord successfully modified \n";
+            else
+                cout << "\nRecord not found \n";
 		}
-			readdoctordatabase2.close();
-			writedoctordatabase2.close();
-			remove("doctordata.dat");
-			rename("doctordata3.dat","doctordata.dat");
-			//showdoctordatafromfile();
-		}
-	
+
+		void doDoctorRelatedWork() {
+			char flag;
+			int choice;
+			do{
+				cout << "enter option 1 to set doctor "<<endl;
+				cout << "enter option 2 to delete " << endl;
+				cout << "enter option 3 to show all data " << endl;
+				cout << "enter option 4 to edit data " << endl;
+				cout << "enter option 5 to exit program " << endl;
+				cin >> choice;
+				if (choice == 1){
+						do{
+						
+						adddoctordata();
+						cout << "add another doctor ? 1 for yes ";
+						cin >> flag;
+					
+						}while (flag == 1);
+					}
+				else if(choice == 3){
+						showdoctordatafromfile();
+				}
+				else if (choice == 2){
+					deletedoctor();
+					// showdoctordatafromfile();
+				}	
+				else if (choice == 4) {
+					editdoctor();
+					// showdoctordata();
+				}
+			}while(choice == 1 | choice == 2 | choice == 3|choice == 4);
+		}	
 };
 
 int main(){
-	int flag;
-	int choice;
-	doctor d1;
-	do{
-		cout << "enter option 1 to set doctor "<<endl;
-		cout << "enter option 2 to delete " << endl;
-		cout << "enter option 3 to show all data " << endl;
-		cout << "enter option 4 to edit data " << endl;
-		cout << "enter option 5 to exit program " << endl;
-		cin >> choice;
-		if (choice == 1){
-				do{
-				
-				d1.adddoctordata();
-				cout << "add another doctor ? 1 for yes ";
-				cin >> flag;
-			
-				}while (flag == 1);
-			}
-		else if(choice == 3){
-				d1.showdoctordatafromfile();
-		}
-		else if (choice == 2){
-			d1.deletedoctor();
-			d1.showdoctordatafromfile();
-		}	
-		else if (choice == 4) {
-			d1.editdoctor();
-			d1.showdoctordata();
-		}
-	}while(choice == 1 | choice == 2 | choice == 3|choice == 4);
+	doctor d;
+	d.doDoctorRelatedWork();
 	//d1.editdoctor();
 	return 0;
 }
