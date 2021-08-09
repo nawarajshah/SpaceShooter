@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #include<iostream>
 #include<string>
 
@@ -16,9 +16,10 @@ class Disease {
     void getDiseaseDetail() {
         
         cout<<"Enter the name of disease: ";
+        // gets(diseaseName);
         cin >>  diseaseName;
         
-        cout<<"Enter the name of virus: ";
+        cout<<"Enter the name of virus/bacteria: ";
       	cin >> virusName;
     }
 
@@ -26,13 +27,13 @@ class Disease {
     void showDiseaseList() {
         cout<<endl;
         cout<<"*** Disease: "<<diseaseName<<" ***"<<endl;
-        cout<<"Virus: "<<virusName<<endl;
+        cout<<"Virus/Bacteria: "<<virusName<<endl;
     }
 };
 
-/*int main() {
-    Disease d;
-    d.getDiseaseDetail();
-    d.showDiseaseList();
-    return 0;
-}*/
+// int main() {
+//     Disease d;
+//     d.getDiseaseDetail();
+//     d.showDiseaseList();
+//     return 0;
+// }
