@@ -14,10 +14,12 @@ int main() {
         
         switch (choice)
         {
-        case 1: p.doPatientRelatedWork();
+        case 1: cout << "\n--- Patient ---"<<endl;
+                p.doPatientRelatedWork();
             break;
 
-        case 2: d.doDoctorRelatedWork();
+        case 2: cout << "\n--- Doctor ---"<<endl;
+                d.doDoctorRelatedWork();
             break;
         
         default:
