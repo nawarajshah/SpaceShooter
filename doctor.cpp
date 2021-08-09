@@ -103,7 +103,7 @@ class doctor: public Person{
                 // storing the position of
                 // current file pointeri.e. at
                 // the end of previously read record
-                pos = fdoctor.tellg();
+                pos = fdoctor.tellg(); // how does this value get updated ?
 
 				fdoctor.read((char*)this,sizeof(doctor));
 				if(fdoctor){
