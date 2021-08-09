@@ -7,7 +7,7 @@ class Person
 {
     private:
         int age;
-        string name, address, email, phoneNo;
+        char name[25], address[25], email[25], phoneNo[25];
 
     public:
         //getting person information
@@ -15,19 +15,19 @@ class Person
             cout<<"Enter age: ";
             cin>>age;
             cout<<"Enter phone number: ";
-            cin.get();// very usefull while using getline multiple times
-            getline(cin, phoneNo);
+            //cin.get();// very usefull while using getline multiple times
+               cin >> phoneNo;
 
             cout<<"Enter name: ";
-            cin.get();
-            getline(cin, name);
+            //cin.get();
+               cin >> name;
 
             cout<<"Enter address: ";
-            cin.get();
-            getline(cin, address);
+            //cin.get();
+               cin >> address;
 
             cout<<"Enter email address: ";
-            cin>>email;
+            	cin>>email;
         };
 
         // displaying person information
