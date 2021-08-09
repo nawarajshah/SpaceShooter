@@ -143,7 +143,7 @@ class patient : public Person {
             char flag;
             int choice;
             do{
-                cout << "\n\nEnter option 1 to add patient "<<endl;
+                cout << "Enter option 1 to add patient "<<endl;
                 cout << "Enter option 2 to show all data " << endl;
                 cout << "Enter option 3 to discharge patient " << endl;
                 cout << "Enter option 4 to edit patient's data " << endl;
