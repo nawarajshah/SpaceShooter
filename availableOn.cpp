@@ -5,7 +5,7 @@ using namespace std;
 class Available
 {
 	private:                                 
-		char DayOfweek[7];
+		char DayOfweek[15][7];
 		char shift1[25],shift2[25];
 		int i,NoD;
 	public:
@@ -62,12 +62,11 @@ class Available
 		
 	
 };
-/*int main()
-{
-	Available a1;
-	a1.whenAvailable();
-	a1.displayAvailable();
-	return 0;
+// int main()
+// {
+// 	Available a1;
+// 	a1.whenAvailable();
+// 	a1.displayAvailable();
+// 	return 0;
 	
-}*/
-
+// }
