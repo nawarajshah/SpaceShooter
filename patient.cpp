@@ -1,6 +1,7 @@
 #include "person.cpp"
 #include "disease.cpp"
 #include<fstream>
+#include <cstring>
 
 class patient : public Person {
     protected:
@@ -17,11 +18,11 @@ class patient : public Person {
 
             // getting disease, appointDate
             cout<<"Disease details"<<endl;
-            cin.get();
+            // cin.get();
             disease.getDiseaseDetail();
 
             cout<<"Appoint date: ";
-            getline(cin, appointDate);
+            cin >> appointDate;
         }
 
         // add patient to the file
@@ -56,7 +57,7 @@ class patient : public Person {
         // deleting patient details from file
         void dischargePatient() {
             int n, flag = 0;
-			cout << "\nEnter the Id of doctor you want to delete"<<endl;
+			cout << "\nEnter the Id of patient you want to delete"<<endl;
 			cin >> n;
 
 			ifstream ifpatient;
@@ -141,9 +142,38 @@ class patient : public Person {
 int main() {
     patient p;
     // p.addPatient();
-    p.showPatientDataFromFile();
-    p.dischargePatient();
+    // p.showPatientDataFromFile();
+    // p.dischargePatient();
     // p.editPatient();
+
+    char flag;
+	int choice;
+	do{
+		cout << "\n\nEnter option 1 to add patient "<<endl;
+		cout << "Enter option 2 to show all data " << endl;
+		cout << "Enter option 3 to discharge patient " << endl;
+		cout << "Enter option 4 to edit patient's data " << endl;
+		cout << "Enter option 5 to exit program " << endl;
+		cin >> choice;
+		if (choice == 1){
+				do{
+				
+				p.addPatient();
+				cout << "add another patient ? 1 for yes ";
+				cin >> flag;
+			
+				}while (flag == 1);
+			}
+		else if(choice == 2){
+				p.showPatientDataFromFile();
+		}
+		else if (choice == 3){
+			p.dischargePatient();
+		}	
+		else if (choice == 4) {
+			p.editPatient();
+		}
+	}while(choice == 1 | choice == 2 | choice == 3|choice == 4);
 
     return 0;
 }
