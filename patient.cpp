@@ -14,6 +14,7 @@ class patient : public Person {
     public:
         void getPatientInformation() {
             // getting patient information using person class
+            cout << "Enter the data for the person";
             getPersonData();
 
             // getting disease, appointDate
@@ -137,6 +138,37 @@ class patient : public Person {
             else
                 cout << "\nRecord not found \n";
         }
+
+        void doPatientRelatedWork() {
+            char flag;
+            int choice;
+            do{
+                cout << "\n\nEnter option 1 to add patient "<<endl;
+                cout << "Enter option 2 to show all data " << endl;
+                cout << "Enter option 3 to discharge patient " << endl;
+                cout << "Enter option 4 to edit patient's data " << endl;
+                cout << "Enter option 5 to exit program " << endl;
+                cin >> choice;
+                if (choice == 1){
+                        do{
+                        
+                        addPatient();
+                        cout << "add another patient ? 1 for yes ";
+                        cin >> flag;
+                    
+                        }while (flag == 1);
+                    }
+                else if(choice == 2){
+                        showPatientDataFromFile();
+                }
+                else if (choice == 3){
+                    dischargePatient();
+                }	
+                else if (choice == 4) {
+                    editPatient();
+                }
+            }while(choice == 1 | choice == 2 | choice == 3|choice == 4);
+        }
 };
 
 int main() {
@@ -146,34 +178,7 @@ int main() {
     // p.dischargePatient();
     // p.editPatient();
 
-    char flag;
-	int choice;
-	do{
-		cout << "\n\nEnter option 1 to add patient "<<endl;
-		cout << "Enter option 2 to show all data " << endl;
-		cout << "Enter option 3 to discharge patient " << endl;
-		cout << "Enter option 4 to edit patient's data " << endl;
-		cout << "Enter option 5 to exit program " << endl;
-		cin >> choice;
-		if (choice == 1){
-				do{
-				
-				p.addPatient();
-				cout << "add another patient ? 1 for yes ";
-				cin >> flag;
-			
-				}while (flag == 1);
-			}
-		else if(choice == 2){
-				p.showPatientDataFromFile();
-		}
-		else if (choice == 3){
-			p.dischargePatient();
-		}	
-		else if (choice == 4) {
-			p.editPatient();
-		}
-	}while(choice == 1 | choice == 2 | choice == 3|choice == 4);
+    p.doPatientRelatedWork();
 
     return 0;
 }
