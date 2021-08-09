@@ -5,20 +5,20 @@ using namespace std;
 
 class Disease {
     private:
-    string diseaseName;
-    string virusName;
+    char diseaseName[25];
+    char virusName[25];
     // Symptom symptoms;
-    string fileName = "disease.dat";
+    //string fileName = "disease.dat";
 
     public:
     // getting information of disease from user
     void getDiseaseDetail() {
         
         cout<<"Enter the name of disease: ";
-        getline(cin, diseaseName);
+        cin >>  diseaseName;
         
         cout<<"Enter the name of virus: ";
-        getline(cin, virusName);
+      	cin >> virusName;
     }
 
     // show disease list
@@ -29,10 +29,9 @@ class Disease {
     }
 };
 
-int main() {
+/*int main() {
     Disease d;
     d.getDiseaseDetail();
     d.showDiseaseList();
-
     return 0;
-}
+}*/

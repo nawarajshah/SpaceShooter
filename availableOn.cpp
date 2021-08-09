@@ -5,8 +5,8 @@ using namespace std;
 class Available
 {
 	private:                                 
-		string DayOfweek[7];
-		string shift1,shift2;
+		char DayOfweek[7];
+		char shift1[25],shift2[25];
 		int i,NoD;
 	public:
 		//Taking input and putting available weekday
@@ -62,12 +62,12 @@ class Available
 		
 	
 };
-int main()
+/*int main()
 {
 	Available a1;
 	a1.whenAvailable();
 	a1.displayAvailable();
 	return 0;
 	
-}
+}*/
 
