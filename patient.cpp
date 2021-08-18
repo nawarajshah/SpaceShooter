@@ -4,7 +4,7 @@
 #include <cstring>
 
 class patient : public Person {
-    protected:
+    private:
         int patientId;
         Disease disease;
         string appointDate;
@@ -43,7 +43,7 @@ class patient : public Person {
             cout<<"Patient Id: "<<patientId<<endl;
             showPersonData();
             disease.showDiseaseList();
-            cout<<"Appointment date: "<<appointDate;
+            cout<<"Appointment date: "<<appointDate<<endl;
         }
 
         // showing patient data from file
@@ -94,7 +94,7 @@ class patient : public Person {
 
         void editPatient() {
 			int n, pos, flag = 0;
-			cout << "\nEnter the Id of doctor you want to edit"<<endl;
+			cout << "\nEnter the Id of patient you want to edit"<<endl;
 			cin >> n;
 
 			fstream fpatient;
@@ -171,14 +171,14 @@ class patient : public Person {
         }
 };
 
-int main() {
-    patient p;
-    // p.addPatient();
-    // p.showPatientDataFromFile();
-    // p.dischargePatient();
-    // p.editPatient();
+// int main() {
+//     patient p;
+//     // p.addPatient();
+//     // p.showPatientDataFromFile();
+//     // p.dischargePatient();
+//     // p.editPatient();
 
-    p.doPatientRelatedWork();
+//     p.doPatientRelatedWork();
 
-    return 0;
-}
+//     return 0;
+// }
