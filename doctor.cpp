@@ -40,7 +40,7 @@ class doctor: public Person{
 		
 		void adddoctordata(){
 			getdoctordata();
-			ofstream doctordatabase("doctordata.dat",ios::binary|ios::out|ios::app);
+			ofstream doctordatabase(doctorFile,ios::binary|ios::out|ios::app);
 			doctordatabase.write((char*)this,sizeof(doctor));	
 		}
 		
@@ -103,7 +103,7 @@ class doctor: public Person{
                 // storing the position of
                 // current file pointeri.e. at
                 // the end of previously read record
-                pos = fdoctor.tellg(); // how does this value get updated ?
+                pos = fdoctor.tellg();
 
 				fdoctor.read((char*)this,sizeof(doctor));
 				if(fdoctor){
@@ -172,9 +172,9 @@ class doctor: public Person{
 		}	
 };
 
-int main(){
-	doctor d;
-	d.doDoctorRelatedWork();
-	//d1.editdoctor();
-	return 0;
-}
+// int main(){
+// 	doctor d;
+// 	d.doDoctorRelatedWork();
+// 	//d1.editdoctor();
+// 	return 0;
+// }
