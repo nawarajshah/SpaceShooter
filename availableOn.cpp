@@ -7,7 +7,7 @@ class Available
 	private:                                 
 		char DayOfweek[15][7];
 		char shift1[25],shift2[25];
-		int i,NoD;
+		int i, NoD;
 	public:
 		//Taking input and putting available weekday
 		void whenAvailable() 
