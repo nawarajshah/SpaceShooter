@@ -1,4 +1,4 @@
-// #pragma once
+#pragma once
 #include<iostream>
 #include<string>
 
@@ -8,8 +8,6 @@ class Disease {
     private:
     char diseaseName[25];
     char virusName[25];
-    // Symptom symptoms;
-    //string fileName = "disease.dat";
 
     public:
     // getting information of disease from user
