@@ -29,7 +29,7 @@ class Person
 
             cout<<"Enter email address: ";
             	cin>>email;
-        };
+        }
 
         // displaying person information
         void showPersonData(){
@@ -38,15 +38,14 @@ class Person
             cout<<"Name: "<<name<<endl;
             cout<<"Address: "<<address<<endl;
             cout<<"Email address: "<<email<<endl;
-        };
+        }
 };
 
 // for testing porpose only
-/*int main()
-{
-    Person person;
-    person.getPersonData();
-    person.showPersonData();
-
-    return 0;
-}*/
+// int main()
+// {
+//     Person person;
+//     person.getPersonData();
+//     person.showPersonData();
+//     return 0;
+// }
